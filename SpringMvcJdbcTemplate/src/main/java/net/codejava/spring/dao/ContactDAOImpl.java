@@ -32,7 +32,7 @@ public class ContactDAOImpl implements ContactDAO {
 		if (contact.getId() > 0) {
 			// update
 			String sql = "UPDATE contact SET name=?, email=?, address=?, "
-						+ "telephone=? WHERE contact_id=?";
+						+ "telephone=? WHERE id=?";
 			jdbcTemplate.update(sql, contact.getName(), contact.getEmail(),
 					contact.getAddress(), contact.getTelephone(), contact.getId());
 		} else {
@@ -46,9 +46,9 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public void delete(int contactId) {
-		String sql = "DELETE FROM contact WHERE contact_id=?";
-		jdbcTemplate.update(sql, contactId);
+	public void delete(int id) {
+		String sql = "DELETE FROM contact WHERE id=?";
+		jdbcTemplate.update(sql, id);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ContactDAOImpl implements ContactDAO {
 			public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Contact aContact = new Contact();
 	
-				aContact.setId(rs.getInt("contact_id"));
+				aContact.setId(rs.getInt("id"));
 				aContact.setName(rs.getString("name"));
 				aContact.setEmail(rs.getString("email"));
 				aContact.setAddress(rs.getString("address"));
@@ -75,8 +75,8 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public Contact get(int contactId) {
-		String sql = "SELECT * FROM contact WHERE contact_id=" + contactId;
+	public Contact get(int id) {
+		String sql = "SELECT * FROM contact WHERE contact_id=" + id;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Contact>() {
 
 			@Override
@@ -84,7 +84,7 @@ public class ContactDAOImpl implements ContactDAO {
 					DataAccessException {
 				if (rs.next()) {
 					Contact contact = new Contact();
-					contact.setId(rs.getInt("contact_id"));
+					contact.setId(rs.getInt("id"));
 					contact.setName(rs.getString("name"));
 					contact.setEmail(rs.getString("email"));
 					contact.setAddress(rs.getString("address"));

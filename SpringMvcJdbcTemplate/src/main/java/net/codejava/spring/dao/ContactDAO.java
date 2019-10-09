@@ -13,9 +13,9 @@ public interface ContactDAO {
 	
 	public void saveOrUpdate(Contact contact);
 	
-	public void delete(int contactId);
+	public void delete(int id);
 	
-	public Contact get(int contactId);
+	public Contact get(int id);
 	
 	public List<Contact> list();
 }

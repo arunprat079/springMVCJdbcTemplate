@@ -52,15 +52,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/deleteContact", method = RequestMethod.GET)
 	public ModelAndView deleteContact(HttpServletRequest request) {
-		int contactId = Integer.parseInt(request.getParameter("id"));
-		contactDAO.delete(contactId);
+		int id = Integer.parseInt(request.getParameter("id"));
+		contactDAO.delete(id);
 		return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping(value = "/editContact", method = RequestMethod.GET)
 	public ModelAndView editContact(HttpServletRequest request) {
-		int contactId = Integer.parseInt(request.getParameter("id"));
-		Contact contact = contactDAO.get(contactId);
+		int id = Integer.parseInt(request.getParameter("id"));
+		Contact contact = contactDAO.get(id);
 		ModelAndView model = new ModelAndView("ContactForm");
 		model.addObject("contact", contact);                        
 		
